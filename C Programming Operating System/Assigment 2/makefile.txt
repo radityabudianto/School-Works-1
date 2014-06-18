@@ -1,0 +1,19 @@
+all: prducer cnsumer
+
+prducer: new_producer.o semaphores.o
+		gcc -o prducer new_producer.o semaphores.o
+
+cnsumer: new_consumer.o semaphores.o
+		gcc -o cnsumer new_consumer.o semaphores.o
+
+semaphores.o: semaphores.c semun.h
+		gcc -c semaphores.c
+
+consumer.o:	new_consumer.c header.h
+		gcc -c new_consumer.c
+
+producer.o: new_producer.c header.h
+		gcc -c new_producer.c
+
+clean:
+		$(RM) prducer cnsumer new_producer.o new_consumer.o semaphores.o
